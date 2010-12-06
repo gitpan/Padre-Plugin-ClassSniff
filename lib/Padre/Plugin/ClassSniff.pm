@@ -1,6 +1,6 @@
 package Padre::Plugin::ClassSniff;
 BEGIN {
-  $Padre::Plugin::ClassSniff::VERSION = '0.03';
+  $Padre::Plugin::ClassSniff::VERSION = '0.30';
 }
 
 # ABSTRACT: Simple Class::Sniff interface for Padre
@@ -70,7 +70,7 @@ Padre::Plugin::ClassSniff - Simple Class::Sniff interface for Padre
 
 =head1 VERSION
 
-version 0.03
+version 0.30
 
 =head1 SYNOPSIS
 

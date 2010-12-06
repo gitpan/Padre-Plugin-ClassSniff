@@ -1,6 +1,6 @@
 package Padre::Task::ClassSniff;
 BEGIN {
-  $Padre::Task::ClassSniff::VERSION = '0.03';
+  $Padre::Task::ClassSniff::VERSION = '0.30';
 }
 
 # ABSTRACT: Running class sniff in the background
@@ -124,7 +124,7 @@ Padre::Task::ClassSniff - Running class sniff in the background
 
 =head1 VERSION
 
-version 0.03
+version 0.30
 
 =head1 SYNOPSIS
 

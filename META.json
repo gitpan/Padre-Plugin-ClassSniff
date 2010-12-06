@@ -45,7 +45,7 @@
          "url" : "http://svn.perlide.org/padre/trunk/Padre-Plugin-ClassSniff/"
       }
    },
-   "version" : "0.03",
+   "version" : "0.30",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
