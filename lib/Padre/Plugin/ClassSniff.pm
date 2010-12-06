@@ -1,4 +1,9 @@
 package Padre::Plugin::ClassSniff;
+BEGIN {
+  $Padre::Plugin::ClassSniff::VERSION = '0.03';
+}
+
+# ABSTRACT: Simple Class::Sniff interface for Padre
 
 use 5.008;
 use warnings;
@@ -7,14 +12,65 @@ use strict;
 use Padre::Config ();
 use Padre::Wx     ();
 use Padre::Plugin ();
-use Padre::Util   ('_T');
 
-our $VERSION = '0.01';
-our @ISA     = 'Padre::Plugin';
+our @ISA = 'Padre::Plugin';
+
+sub padre_interfaces {
+	'Padre::Plugin' => 0.47,;
+}
+
+sub plugin_name {
+	Wx::gettext('Class Sniffer');
+}
+
+sub menu_plugins_simple {
+	my $self = shift;
+	return $self->plugin_name => [
+		Wx::gettext('Print Report') => sub { $self->print_report },
+		Wx::gettext('About')        => sub { $self->show_about },
+	];
+}
+
+sub print_report {
+	my $self = shift;
+	require Padre::Task::ClassSniff;
+	Padre::Task::ClassSniff->new(
+		mode => 'print_report',
+	)->schedule();
+}
+
+
+
+sub show_about {
+	my $self = shift;
+
+	# Generate the About dialog
+	my $about = Wx::AboutDialogInfo->new;
+	$about->SetName("Padre::Plugin::ClassSniff");
+	$about->SetDescription( <<"END_MESSAGE" );
+Initial Class::Sniff support for Padre
+END_MESSAGE
+	$about->SetVersion($Padre::Plugin::ClassSniff::VERSION);
+
+	# Show the About dialog
+	Wx::AboutBox($about);
+
+	return;
+}
+
+1;
+
+
+
+=pod
 
 =head1 NAME
 
 Padre::Plugin::ClassSniff - Simple Class::Sniff interface for Padre
+
+=head1 VERSION
+
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -42,69 +98,6 @@ The output will go to the Padre output window.
 
 TODO: Configuration
 
-=cut
-
-
-sub padre_interfaces {
-	'Padre::Plugin' => 0.24,
-	'Padre::Task' => 0.29,
-}
-
-sub plugin_name {
-	'Class::Sniff';
-}
-
-sub menu_plugins_simple {
-	my $self = shift;
-	return $self->plugin_name => [
-		_T('About')             => sub { $self->show_about },
-		_T('Print Report')      => sub { $self->print_report },
-#		_T('Configuration')     => sub { $self->configuration_dialog(Padre->ide->wx) },
-	];
-}
-
-sub print_report {
-	my $self = shift;
-	require Padre::Task::ClassSniff;
-	Padre::Task::ClassSniff->new(
-		mode => 'print_report',
-	)->schedule();
-}
-
-
-
-sub show_about {
-	my $self = shift;
-
-	# Generate the About dialog
-	my $about = Wx::AboutDialogInfo->new;
-	$about->SetName("Padre::Plugin::ClassSniff");
-	$about->SetDescription( <<"END_MESSAGE" );
-Initial Class::Sniff support for Padre
-END_MESSAGE
-	$about->SetVersion( $VERSION );
-
-	# Show the About dialog
-	Wx::AboutBox( $about );
-
-	return;
-}
-
-#sub plugin_preferences {
-#	my $self = shift;
-#	my $wxparent = shift;
-#}
-
-
-1;
-
-__END__
-
-
-=head1 AUTHOR
-
-Steffen Mueller, C<< <smueller at cpan.org> >>
-
 =head1 BUGS
 
 Please report any bugs or feature requests to L<http://padre.perlide.org/>
@@ -117,9 +110,29 @@ all rights reserved.
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Steffen Mueller <smueller@cpan.org>
+
+=item *
+
+Ahmad M. Zawawi <ahmad.zawawi@gmail.com>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Steffen Mueller.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-# Copyright 2009 The Padre development team as listed in Padre.pm.
-# LICENSE
-# This program is free software; you can redistribute it and/or
-# modify it under the same terms as Perl 5 itself.
+
+__END__
+

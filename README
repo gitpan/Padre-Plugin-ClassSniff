@@ -1,30 +1,13 @@
-Padre-Plugin-Git
 
-INSTALLATION
 
-To install this module, run the following commands:
+This archive contains the distribution Padre-Plugin-ClassSniff,
+version 0.03:
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+  Simple Class::Sniff interface for Padre
 
-WARNING
+This software is copyright (c) 2010 by Steffen Mueller.
 
-This plugin relies on the command 'git' to be present. There's no check in the
-installation script that git is installed. You have to ensure that yourself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
-SUPPORT AND DOCUMENTATION
-
-After installing, you can find documentation for this module with the
-perldoc command.
-
-    perldoc Padre::Plugin::Git
-
-COPYRIGHT AND LICENCE
-
-Copyright (C) 2009 Kaare Rasmussen
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
 
